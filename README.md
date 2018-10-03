@@ -47,5 +47,5 @@ Lihat [kontributor](https://github.com/babeguru/spring-react/contributors) yang 
 
 ## License
 
-Lisensi proyek ini di bawah MIT License - lihat di berkas [LICENSE.md](LICENSE.md) untuk lebih jelasnya.
+Lisensi proyek ini menggunakan lisensi MIT - lihat di berkas [LICENSE.md](LICENSE.md) untuk lebih jelasnya.
 
