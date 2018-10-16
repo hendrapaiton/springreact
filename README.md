@@ -1,7 +1,7 @@
 # SPRING-REACT
 
 Demo Proyek untuk pembuatan proyek berbasis backend api dengan Java Spring Framework dan ui frontend dengan React.
-Untuk melihat hasil implementasi dari proyek ini bisa dilihat demonya di [heroku](https://ancient-tor-60492.herokuapp.com/).
+Untuk melihat hasil implementasi dari proyek ini bisa dilihat demonya di [heroku](https://springreact.herokuapp.com/).
 
 
 ## Getting Started
