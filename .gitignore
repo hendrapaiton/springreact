@@ -7,6 +7,6 @@ node
 *.log
 asciidoctor.css
 README.html
-built
+src/main/resources/static/js
 dump.rdb
 package-lock.json

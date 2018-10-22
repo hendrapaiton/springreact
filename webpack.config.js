@@ -4,7 +4,7 @@ module.exports = {
     entry: './src/main/js/app.js',
     devtool: 'sourcemaps',
     cache: true,
-    mode: 'production',
+    mode: 'development',
     output: {
         path: __dirname,
         filename: './src/main/resources/static/js/react.js'
@@ -17,7 +17,8 @@ module.exports = {
                 use: [{
                     loader: 'babel-loader',
                     options: {
-                        presets: ["@babel/preset-env", "@babel/preset-react"]
+                        presets: ["@babel/preset-env", "@babel/preset-react"],
+                        plugins: ["@babel/plugin-proposal-class-properties"]
                     }
                 }]
             }
