@@ -7,41 +7,41 @@ import About from "./components/About";
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      menu: "fellowship",
-      employees: []
-    };
-  }
-
-  panggilMenu = (menu) => {
-    this.setState({ menu: menu })
-  }
-
-  tampilMenu() {
-    switch (this.state.menu) {
-      case "fellowship":
-        return <Fellowship/>;
-      case "about":
-        return <About/>;
+    constructor(props) {
+        super(props);
+        this.state = {
+            menu: "fellowship",
+            employees: []
+        };
     }
-  }
 
-  render() {
-    return (
-      <div className="container my-md-4">
-        <Header panggilMenu={this.panggilMenu}/>
-        <div className="row">
-          <div className="col">{this.tampilMenu()}</div>
-        </div>
-        <Footer/>
-      </div>
-    )
-  }
+    panggilMenu = (menu) => {
+        this.setState({menu: menu})
+    }
+
+    tampilMenu() {
+        switch (this.state.menu) {
+            case "fellowship":
+                return <Fellowship/>;
+            case "about":
+                return <About/>;
+        }
+    }
+
+    render() {
+        return (
+            <div className="container my-md-4">
+                <Header panggilMenu={this.panggilMenu}/>
+                <div className="row">
+                    <div className="col">{this.tampilMenu()}</div>
+                </div>
+                <Footer/>
+            </div>
+        )
+    }
 }
 
 ReactDOM.render(
-  <App/>,
-  document.getElementById('react')
+    <App/>,
+    document.getElementById('react')
 )

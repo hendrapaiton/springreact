@@ -2,15 +2,15 @@ import React from 'react';
 
 class About extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  render() {
-    return(
-      <div>About</div>
-    )
-  }
+    render() {
+        return (
+            <div>About</div>
+        )
+    }
 
 }
 
