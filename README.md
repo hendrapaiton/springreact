@@ -34,7 +34,7 @@ Kemudian buka di browser dengan alamat [localhost:8080](localhost:8080).
 
 ## Versioning
 
-Kami menggunakan [SemVer](http://semver.org/) untuk versi proyek. Untuk versi yang tersedia, silahkan lihat di [tags pada repository ini](https://github.com/babeguru/spring-react/tags). 
+Kami menggunakan [SemVer](http://semver.org/) untuk versi proyek. Untuk versi yang tersedia, silahkan lihat di [tags pada repository ini](https://github.com/babeguru/springreact/tags).
 
 
 ## Authors
@@ -42,7 +42,7 @@ Kami menggunakan [SemVer](http://semver.org/) untuk versi proyek. Untuk versi ya
 * **Greg Turnquist** - *Kode Awal* - [gregturn](https://github.com/gregturn)
 * **Hendra Dwi Saputra** - *Pengembangan Lanjutan* - [babeguru](https://github.com/babeguru)
 
-Lihat [kontributor](https://github.com/babeguru/spring-react/contributors) yang berpartisipasi dalam proyek ini.
+Lihat [kontributor](https://github.com/babeguru/springreact/contributors) yang berpartisipasi dalam proyek ini.
 
 
 ## License

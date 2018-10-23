@@ -4,7 +4,7 @@
   "description": "Spring React",
   "repository": {
     "type": "git",
-    "url": "https://github.com/babeguru/spring-react.git"
+    "url": "https://github.com/babeguru/springreact.git"
   },
   "keywords": [
     "rest",
@@ -16,9 +16,9 @@
   "author": "Hendra Dwi Saputra",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/babeguru/spring-react/issues"
+    "url": "https://github.com/babeguru/springreact/issues"
   },
-  "homepage": "https://spring-react.herokuapp.com",
+  "homepage": "https://springreact.herokuapp.com",
   "dependencies": {
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
