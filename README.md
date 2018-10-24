@@ -1,4 +1,4 @@
-# SPRING-REACT
+# SPRING-REACT [![Build Status](https://travis-ci.org/babeguru/springreact.svg?branch=master)](https://travis-ci.org/babeguru/springreact)
 
 Demo Proyek untuk pembuatan proyek berbasis backend api dengan Java Spring Framework dan ui frontend dengan React.
 Untuk melihat hasil implementasi dari proyek ini bisa dilihat demonya di [heroku](https://springreact.herokuapp.com/).
