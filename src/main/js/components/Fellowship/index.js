@@ -3,6 +3,7 @@ import client from '../../api/client';
 import follow from '../../api/follow';
 const root = '/api';
 import Employee from './list';
+import Navigation from './nav';
 
 class Fellowship extends React.Component {
 
@@ -32,8 +33,7 @@ class Fellowship extends React.Component {
                 employees: employeeCollection.entity._embedded.employees,
                 attributes: Object.keys(this.schema.properties),
                 pageSize: pageSize,
-                links: employeeCollection.entity._links
-            });
+                links: employeeCollection.entity._links});
         });
     }
 
@@ -104,23 +104,7 @@ class Fellowship extends React.Component {
                         )}
                         </tbody>
                     </table>
-                    <nav aria-label="Page Navigation">
-                        <ul className="pagination pagination-sm justify-content-sm-center">
-                            <li className="page-item disabled"><a className="page-link">First</a></li>
-                            <li className="page-item"><a className="page-link">Prev</a></li>
-                            <li className="page-item">
-                                <select className="form-control form-control-sm" id="pagelimit">
-                                    <option>5</option>
-                                    <option>10</option>
-                                    <option>15</option>
-                                    <option>20</option>
-                                    <option>25</option>
-                                </select>
-                            </li>
-                            <li className="page-item"><a className="page-link">Next</a></li>
-                            <li className="page-item"><a className="page-link">Last</a></li>
-                        </ul>
-                    </nav>
+                    <Navigation/>
                 </div>
 
                 <div className="col">
