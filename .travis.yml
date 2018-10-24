@@ -1,12 +1,12 @@
 language: java
 script: mvn package
 sudo: true
-dist: xenial
-jdk: oraclejdk8
+dist: trusty
+jdk: openjdk8
 addons:
   apt:
     packages:
-    - oracle-java8-installer
+    - openjdk-8-jdk
 before_install:
 - chmod +x mvnw
 deploy:
