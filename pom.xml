@@ -57,8 +57,20 @@
         </dependency>
     </dependencies>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>rubygems-releases</id>
+            <url>http://rubygems-proxy.torquebox.org/releases</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>0.5.4</version>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -99,6 +111,37 @@
                 </executions>
             </plugin>
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>de.saumya.mojo</groupId>
+                    <artifactId>gem-maven-plugin</artifactId>
+                    <version>1.0.5</version>
+                    <configuration>
+                        <execArgLines>
+                            <execArgLine>${project.build.directory}/rubygems/bin/travis</execArgLine>
+                            <execArgLine>encrypt</execArgLine>
+                            <execArgLine>HEROKU_API_KEY=${herokuApiKey}</execArgLine>
+                        </execArgLines>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>rubygems</groupId>
+                            <artifactId>travis</artifactId>
+                            <version>1.7.1</version>
+                            <type>gem</type>
+                        </dependency>
+                        <dependency>
+                            <groupId>rubygems</groupId>
+                            <artifactId>pry</artifactId>
+                            <version>0.9.12.6</version>
+                            <type>gem</type>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>

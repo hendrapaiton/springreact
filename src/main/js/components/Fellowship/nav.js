@@ -10,7 +10,7 @@ class Nav extends React.Component {
         return (
             <nav aria-label="Page Navigation">
                 <ul className="pagination pagination-sm justify-content-sm-center">
-                    <li className="page-item disabled"><a className="page-link">First</a></li>
+                    <li className="page-item"><a className="page-link">First</a></li>
                     <li className="page-item"><a className="page-link">Prev</a></li>
                     <li className="page-item">
                         <select className="form-control form-control-sm" id="pagelimit">
