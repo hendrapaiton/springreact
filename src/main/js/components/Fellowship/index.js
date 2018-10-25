@@ -1,6 +1,7 @@
 import React from 'react';
 import client from '../../api/client';
 import follow from '../../api/follow';
+
 const root = '/api';
 import Employee from './list';
 import Navigation from './nav';
@@ -10,10 +11,10 @@ class Fellowship extends React.Component {
     constructor(props) {
         super(props);
         this.state = {employees: [], attributes: [], pageSize: 5, links: {}};
-        this.updatePageSize = this.updatePageSize.bind(this);
         this.onCreate = this.onCreate.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onNavigate = this.onNavigate.bind(this);
+        this.updatePageSize = this.updatePageSize.bind(this);
     }
 
     loadFromServer(pageSize) {
@@ -33,7 +34,8 @@ class Fellowship extends React.Component {
                 employees: employeeCollection.entity._embedded.employees,
                 attributes: Object.keys(this.schema.properties),
                 pageSize: pageSize,
-                links: employeeCollection.entity._links});
+                links: employeeCollection.entity._links
+            });
         });
     }
 
@@ -75,9 +77,8 @@ class Fellowship extends React.Component {
     }
 
     updatePageSize(pageSize) {
-        if (pageSize !== this.state.pageSize) {
-            this.loadFromServer(pageSize);
-        }
+        this.setState({pageSize: pageSize});
+        this.loadFromServer(pageSize);
     }
 
     componentDidMount() {
@@ -104,7 +105,7 @@ class Fellowship extends React.Component {
                         )}
                         </tbody>
                     </table>
-                    <Navigation/>
+                    <Navigation pageSize={this.state.pageSize} updatePageSize={this.updatePageSize}/>
                 </div>
 
                 <div className="col">
