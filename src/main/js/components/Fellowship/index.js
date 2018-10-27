@@ -4,7 +4,6 @@ import follow from '../../api/follow';
 
 const root = '/api';
 import Employee from './list';
-import Navigation from './nav';
 
 class Fellowship extends React.Component {
 
@@ -15,6 +14,11 @@ class Fellowship extends React.Component {
         this.onDelete = this.onDelete.bind(this);
         this.onNavigate = this.onNavigate.bind(this);
         this.updatePageSize = this.updatePageSize.bind(this);
+        this.updateNav = this.updateNav.bind(this);
+        this.handleNavFirst = this.handleNavFirst.bind(this);
+        this.handleNavPrev = this.handleNavPrev.bind(this);
+        this.handleNavNext = this.handleNavNext.bind(this);
+        this.handleNavLast = this.handleNavLast.bind(this);
     }
 
     loadFromServer(pageSize) {
@@ -76,9 +80,44 @@ class Fellowship extends React.Component {
         });
     }
 
-    updatePageSize(pageSize) {
-        this.setState({pageSize: pageSize});
-        this.loadFromServer(pageSize);
+    updateNav(event) {
+        this.updatePageSize(event.target.value);
+    }
+
+    async updatePageSize(pageSize) {
+        await this.setState({pageSize: pageSize});
+        await this.loadFromServer(pageSize);
+    }
+
+    handleNavFirst(e){
+        e.preventDefault();
+        this.onNavigate(this.state.links.first.href);
+    }
+
+    handleNavPrev(e) {
+        e.preventDefault();
+        this.onNavigate(this.state.links.prev.href);
+    }
+
+    handleNavNext(e) {
+        e.preventDefault();
+        this.onNavigate(this.state.links.next.href);
+    }
+
+    handleNavLast(e) {
+        e.preventDefault();
+        this.onNavigate(this.state.links.last.href);
+    }
+
+    onNavigate(navUri) {
+        client({method: 'GET', path: navUri}).done(employeeCollection => {
+            this.setState({
+                employees: employeeCollection.entity._embedded.employees,
+                attributes: this.state.attributes,
+                pageSize: this.state.pageSize,
+                links: employeeCollection.entity._links
+            });
+        });
     }
 
     componentDidMount() {
@@ -105,7 +144,34 @@ class Fellowship extends React.Component {
                         )}
                         </tbody>
                     </table>
-                    <Navigation pageSize={this.state.pageSize} updatePageSize={this.updatePageSize}/>
+                    <nav aria-label="Page Navigation">
+                        <ul className="pagination pagination-sm justify-content-sm-center">
+                            <li className={"first" in this.state.links ? "page-item" : "page-item disabled"}>
+                                <a className="page-link" onClick={this.handleNavFirst}>First</a>
+                            </li>
+                            <li className={"prev" in this.state.links ? "page-item" : "page-item disabled"}>
+                                <a className="page-link" onClick={this.handleNavPrev}>Prev</a>
+                            </li>
+                            <li className="page-item">
+                                <select
+                                    className="form-control form-control-sm"
+                                    value={this.state.pageSize}
+                                    onChange={this.updateNav}>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                </select>
+                            </li>
+                            <li className={"next" in this.state.links ? "page-item" : "page-item disabled"}>
+                                <a className="page-link" onClick={this.handleNavNext}>Next</a>
+                            </li>
+                            <li className={"last" in this.state.links ? "page-item" : "page-item disabled"}>
+                                <a className="page-link" onClick={this.handleNavLast}>Last</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
 
                 <div className="col">
