@@ -10,8 +10,11 @@ class List extends React.Component {
     pilihBaris() {
         if (this.props.id !== this.props.baris) {
             this.props.barisAktif(this.props.id);
+            this.props.gantiForm("update");
+            this.props.setEmployee(this.props.employee);
         } else {
             this.props.barisAktif("");
+            this.props.gantiForm("create");
         }
     }
 

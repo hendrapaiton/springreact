@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Form extends React.Component {
+class Create extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -17,16 +17,13 @@ class Form extends React.Component {
 
         return(
             <form>
+                <h4 className="title text-center">Create Fellowship</h4>
+                <hr className="mb-md-4"/>
                 {inputs}
                 <div className="form-group row">
                     <div className="col">
-                        <button type="submit" className="btn btn-danger btn-block">
-                            Delete
-                        </button>
-                    </div>
-                    <div className="col">
                         <button type="submit" className="btn btn-success btn-block">
-                            Add
+                            Create
                         </button>
                     </div>
                 </div>
@@ -35,4 +32,4 @@ class Form extends React.Component {
     }
 }
 
-export default Form;
+export default Create;

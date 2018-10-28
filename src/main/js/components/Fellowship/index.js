@@ -4,7 +4,8 @@ import follow from '../../api/follow';
 
 const root = '/api';
 import Employee from './list';
-import Form from './form';
+import Create from './create';
+import Update from './update';
 
 class Fellowship extends React.Component {
 
@@ -15,8 +16,9 @@ class Fellowship extends React.Component {
             attributes: [],
             pageSize: 5,
             links: {},
-            title: "Add Fellowship",
-            baris: ""
+            baris: "",
+            form: "create",
+            employee: []
         };
         this.onCreate = this.onCreate.bind(this);
         this.onDelete = this.onDelete.bind(this);
@@ -28,6 +30,26 @@ class Fellowship extends React.Component {
         this.handleNavNext = this.handleNavNext.bind(this);
         this.handleNavLast = this.handleNavLast.bind(this);
         this.barisAktif = this.barisAktif.bind(this);
+        this.tampilForm = this.tampilForm.bind(this);
+        this.gantiForm = this.gantiForm.bind(this);
+        this.setEmployee = this.setEmployee.bind(this);
+    }
+
+    setEmployee(employee) {
+        this.setState({employee: employee});
+    }
+
+    gantiForm(form) {
+        this.setState({form: form});
+    }
+
+    tampilForm() {
+        switch (this.state.form) {
+            case "create":
+                return <Create attributes={this.state.attributes}/>;
+            case "update":
+                return <Update attributes={this.state.attributes} employee={this.state.employee}/>;
+        }
     }
 
     barisAktif(baris) {
@@ -156,7 +178,10 @@ class Fellowship extends React.Component {
                                       id={employee._links.self.href}
                                       employee={employee}
                                       barisAktif={this.barisAktif}
-                                      baris={this.state.baris}/>
+                                      baris={this.state.baris}
+                                      gantiForm={this.gantiForm}
+                                      setEmployee={this.setEmployee}
+                            />
                         )}
                         </tbody>
                     </table>
@@ -193,9 +218,7 @@ class Fellowship extends React.Component {
                 <div className="col">
                     <div className="card">
                         <div className="card-body pb-0">
-                            <h4 className="title text-center">{this.state.title}</h4>
-                            <hr className="mb-md-4"/>
-                            <Form attributes={this.state.attributes}/>
+                            {this.tampilForm()}
                         </div>
                     </div>
                 </div>
