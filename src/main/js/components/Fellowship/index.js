@@ -4,12 +4,20 @@ import follow from '../../api/follow';
 
 const root = '/api';
 import Employee from './list';
+import Form from './form';
 
 class Fellowship extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {employees: [], attributes: [], pageSize: 5, links: {}};
+        this.state = {
+            employees: [],
+            attributes: [],
+            pageSize: 5,
+            links: {},
+            title: "Add Fellowship",
+            baris: ""
+        };
         this.onCreate = this.onCreate.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onNavigate = this.onNavigate.bind(this);
@@ -19,6 +27,11 @@ class Fellowship extends React.Component {
         this.handleNavPrev = this.handleNavPrev.bind(this);
         this.handleNavNext = this.handleNavNext.bind(this);
         this.handleNavLast = this.handleNavLast.bind(this);
+        this.barisAktif = this.barisAktif.bind(this);
+    }
+
+    barisAktif(baris) {
+        this.setState({baris: baris});
     }
 
     loadFromServer(pageSize) {
@@ -89,7 +102,7 @@ class Fellowship extends React.Component {
         await this.loadFromServer(pageSize);
     }
 
-    handleNavFirst(e){
+    handleNavFirst(e) {
         e.preventDefault();
         this.onNavigate(this.state.links.first.href);
     }
@@ -135,12 +148,15 @@ class Fellowship extends React.Component {
                             <th scope="col">First Name</th>
                             <th scope="col">Last Name</th>
                             <th scope="col">Description</th>
-                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
                         {this.state.employees.map(employee =>
-                            <Employee key={employee._links.self.href} employee={employee} onDelete={this.onDelete}/>
+                            <Employee key={employee._links.self.href}
+                                      id={employee._links.self.href}
+                                      employee={employee}
+                                      barisAktif={this.barisAktif}
+                                      baris={this.state.baris}/>
                         )}
                         </tbody>
                     </table>
@@ -177,37 +193,9 @@ class Fellowship extends React.Component {
                 <div className="col">
                     <div className="card">
                         <div className="card-body pb-0">
-                            <h4 className="title text-center">Add Fellowship</h4>
+                            <h4 className="title text-center">{this.state.title}</h4>
                             <hr className="mb-md-4"/>
-                            <form>
-                                <div className="form-group row">
-                                    <label htmlFor="firstName" className="col-sm-4 col-form-label">Firstname</label>
-                                    <div className="col-sm-8">
-                                        <input type="text" className="form-control" id="firstName"
-                                               placeholder="Input firstname..."/>
-                                    </div>
-                                </div>
-                                <div className="form-group row">
-                                    <label htmlFor="lastName" className="col-sm-4 col-form-label">Lastname</label>
-                                    <div className="col-sm-8">
-                                        <input type="text" className="form-control" id="lastName"
-                                               placeholder="Input lastname..."/>
-                                    </div>
-                                </div>
-                                <div className="form-group row">
-                                    <label htmlFor="descriptions"
-                                           className="col-sm-4 col-form-label">Descriptions</label>
-                                    <div className="col-sm-8">
-                                        <input type="text" className="form-control" id="descriptions"
-                                               placeholder="Input descriptions..."/>
-                                    </div>
-                                </div>
-                                <div className="form-group row">
-                                    <button type="submit" className="btn btn-success btn-block mx-3 mt-md-2">Add
-                                        Fellow
-                                    </button>
-                                </div>
-                            </form>
+                            <Form attributes={this.state.attributes}/>
                         </div>
                     </div>
                 </div>

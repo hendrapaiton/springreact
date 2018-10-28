@@ -18,7 +18,7 @@ class Header extends React.Component {
     render() {
         return (
             <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                <a className="navbar-brand" href="#">DASHBOARD</a>
+                <a className="navbar-brand mr-lg-5" href="#">DASHBOARD</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#menubar"
                         aria-expanded="false">
                     <span className="navbar-toggler-icon"></span>
