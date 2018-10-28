@@ -1,4 +1,4 @@
-# SPRING-REACT [![Build Status](https://travis-ci.org/babeguru/springreact.svg?branch=master)](https://travis-ci.org/babeguru/springreact)
+# SPRING-REACT &nbsp; [![Build Status](https://travis-ci.org/babeguru/springreact.svg?branch=master)](https://travis-ci.org/babeguru/springreact)
 
 Demo Proyek untuk pembuatan proyek berbasis backend api dengan Java Spring Framework dan ui frontend dengan React.
 Untuk melihat hasil implementasi dari proyek ini bisa dilihat demonya di [heroku](https://springreact.herokuapp.com/).
@@ -49,3 +49,8 @@ Lihat [kontributor](https://github.com/babeguru/springreact/contributors) yang b
 
 Lisensi proyek ini menggunakan lisensi MIT - lihat di berkas [LICENSE.md](LICENSE.md) untuk lebih jelasnya.
 
+## Donasi
+
+Jika proyek ini membantu dalam menghemat waktumu untuk ngoding, kamu dapat mentraktirku secangkir kopi ;)
+
+[![PayPal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6HBXH72JVPBSQ)
