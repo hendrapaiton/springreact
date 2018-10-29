@@ -1,4 +1,6 @@
 import React from 'react';
+import follow from "../../api/follow";
+import client from "../../api/client";
 
 class Update extends React.Component {
     constructor(props) {
@@ -6,9 +8,38 @@ class Update extends React.Component {
         this.state = {
             firstName: this.props.employee["firstName"],
             lastName: this.props.employee["lastName"],
-            descriptions: this.props.employee["descriptions"]
+            description: this.props.employee["description"]
         }
         this.updateEntity = this.updateEntity.bind(this);
+        this.onDelete = this.onDelete.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
+    }
+
+    onUpdate(oldEmployee) {
+        follow(client, root, ['employees']).then(employeeCollection => {
+            return client({
+                method: 'PUT',
+                path: employeeCollection.entity._links.self.href,
+                entity: oldEmployee,
+                headers: {'Content-Type': 'application/json'}
+            })
+        }).then(response => {
+            return follow(client, root, [
+                {rel: 'employees', params: {'size': this.props.pageSize}}]);
+        }).done(response => {
+            if (typeof response.entity._links.last !== "undefined") {
+                this.props.onNavigate(response.entity._links.last.href);
+            } else {
+                this.props.onNavigate(response.entity._links.self.href);
+            }
+        });
+    }
+
+    onDelete() {
+        let employee = this.props.employee;
+        client({method: 'DELETE', path: employee._links.self.href}).done(response => {
+            this.loadFromServer(this.props.pageSize);
+        });
     }
 
     updateEntity(attribute, event) {
@@ -35,7 +66,7 @@ class Update extends React.Component {
                 {inputs}
                 <div className="form-group row">
                     <div className="col">
-                        <button type="submit" className="btn btn-danger btn-block">
+                        <button type="submit" className="btn btn-danger btn-block" onClick={this.onDelete}>
                             Delete
                         </button>
                     </div>

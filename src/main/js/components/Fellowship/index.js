@@ -20,8 +20,6 @@ class Fellowship extends React.Component {
             form: "create",
             employee: []
         };
-        this.onCreate = this.onCreate.bind(this);
-        this.onDelete = this.onDelete.bind(this);
         this.onNavigate = this.onNavigate.bind(this);
         this.updatePageSize = this.updatePageSize.bind(this);
         this.updateNav = this.updateNav.bind(this);
@@ -48,7 +46,11 @@ class Fellowship extends React.Component {
             case "create":
                 return <Create attributes={this.state.attributes}/>;
             case "update":
-                return <Update attributes={this.state.attributes} employee={this.state.employee}/>;
+                return <Update
+                    attributes={this.state.attributes}
+                    employee={this.state.employee}
+                    onNavigate={this.onNavigate}
+                    pageSize={this.state.pageSize}/>;
         }
     }
 
@@ -75,32 +77,6 @@ class Fellowship extends React.Component {
                 pageSize: pageSize,
                 links: employeeCollection.entity._links
             });
-        });
-    }
-
-    onCreate(newEmployee) {
-        follow(client, root, ['employees']).then(employeeCollection => {
-            return client({
-                method: 'POST',
-                path: employeeCollection.entity._links.self.href,
-                entity: newEmployee,
-                headers: {'Content-Type': 'application/json'}
-            })
-        }).then(response => {
-            return follow(client, root, [
-                {rel: 'employees', params: {'size': this.state.pageSize}}]);
-        }).done(response => {
-            if (typeof response.entity._links.last !== "undefined") {
-                this.onNavigate(response.entity._links.last.href);
-            } else {
-                this.onNavigate(response.entity._links.self.href);
-            }
-        });
-    }
-
-    onDelete(employee) {
-        client({method: 'DELETE', path: employee._links.self.href}).done(response => {
-            this.loadFromServer(this.state.pageSize);
         });
     }
 
@@ -181,6 +157,7 @@ class Fellowship extends React.Component {
                                       baris={this.state.baris}
                                       gantiForm={this.gantiForm}
                                       setEmployee={this.setEmployee}
+                                      form={this.state.form}
                             />
                         )}
                         </tbody>

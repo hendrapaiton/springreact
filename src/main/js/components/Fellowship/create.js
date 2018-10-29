@@ -1,8 +1,30 @@
 import React from 'react';
+import follow from "../../api/follow";
+import client from "../../api/client";
 
 class Create extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    onCreate(newEmployee) {
+        follow(client, root, ['employees']).then(employeeCollection => {
+            return client({
+                method: 'POST',
+                path: employeeCollection.entity._links.self.href,
+                entity: newEmployee,
+                headers: {'Content-Type': 'application/json'}
+            })
+        }).then(response => {
+            return follow(client, root, [
+                {rel: 'employees', params: {'size': this.state.pageSize}}]);
+        }).done(response => {
+            if (typeof response.entity._links.last !== "undefined") {
+                this.onNavigate(response.entity._links.last.href);
+            } else {
+                this.onNavigate(response.entity._links.self.href);
+            }
+        });
     }
 
     render() {

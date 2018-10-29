@@ -7,14 +7,22 @@ class List extends React.Component {
         this.pilihBaris = this.pilihBaris.bind(this);
     }
 
-    pilihBaris() {
-        if (this.props.id !== this.props.baris) {
-            this.props.barisAktif(this.props.id);
-            this.props.gantiForm("update");
-            this.props.setEmployee(this.props.employee);
+    async pilihBaris() {
+        if (this.props.id !== this.props.baris &&
+            await this.props.form === "create") {
+            await this.props.barisAktif(this.props.id);
+            await this.props.setEmployee(this.props.employee);
+            await this.props.gantiForm("update");
+        } else if (this.props.id !== this.props.baris &&
+            await this.props.form === "update") {
+            await this.props.barisAktif("");
+            await this.props.gantiForm("create");
+            await this.props.barisAktif(this.props.id);
+            await this.props.setEmployee(this.props.employee);
+            await this.props.gantiForm("update");
         } else {
-            this.props.barisAktif("");
-            this.props.gantiForm("create");
+            await this.props.barisAktif("");
+            await this.props.gantiForm("create");
         }
     }
 
